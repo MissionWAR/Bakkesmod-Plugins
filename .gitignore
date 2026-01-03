@@ -1,0 +1,46 @@
+# Build artifacts
+build/
+*.obj
+*.pch
+*.idb
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# Plugin output
+*/plugins/*.dll
+!*/plugins/.gitkeep
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+ipch/
+x64/
+Debug/
+Release/
+
+# Build intermediates inside plugin folders
+*/build/
+RankedEssentials/build/
+
+# Documentation
+DOCS/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

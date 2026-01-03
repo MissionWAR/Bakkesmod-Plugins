@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Plugin
         working-directory: RankedEssentials
-        run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64 /p:BakkesModPath="${{ github.workspace }}"
+        run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64 /p:BakkesModPath="${{ github.workspace }}" /p:PostBuildEventUseInBuild=false
 
       - name: Get version
         id: version

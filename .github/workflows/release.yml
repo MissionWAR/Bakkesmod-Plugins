@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.3.0)'
+        required: true
+        default: 'v1.3.0'
 
 jobs:
   build:
@@ -22,14 +28,20 @@ jobs:
         working-directory: RankedEssentials
         run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64
 
-      - name: Get version from tag
+      - name: Get version
         id: version
         shell: bash
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
           name: Ranked Essentials ${{ steps.version.outputs.VERSION }}
           body: |
             ## Ranked Essentials ${{ steps.version.outputs.VERSION }}

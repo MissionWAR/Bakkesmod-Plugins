@@ -24,9 +24,13 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
 
+      - name: Download BakkesMod SDK
+        run: |
+          git clone https://github.com/bakkesmodorg/BakkesModSDK.git ${{ github.workspace }}/bakkesmodsdk
+
       - name: Build Plugin
         working-directory: RankedEssentials
-        run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64
+        run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64 /p:BakkesModPath="${{ github.workspace }}"
 
       - name: Get version
         id: version

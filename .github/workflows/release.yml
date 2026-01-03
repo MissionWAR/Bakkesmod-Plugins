@@ -55,7 +55,6 @@ jobs:
             ### Installation
             1. Download `RankedEssentials.dll` below
             2. Copy to `%APPDATA%\bakkesmod\bakkesmod\plugins\`
-            3. Load in-game: F6 → `plugin load RankedEssentials`
           files: RankedEssentials/plugins/RankedEssentials.dll
           draft: false
           prerelease: false

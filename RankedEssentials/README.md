@@ -10,9 +10,10 @@ Auto-queue, auto-freeplay, and auto-skip replays for Rocket League.
 
 ## Install
 
-1. Copy `plugins/RankedEssentials.dll` to `%APPDATA%\bakkesmod\bakkesmod\plugins\`
-2. In-game console (`~`): `plugin load RankedEssentials`
-3. Configure: F2 → "Ranked Essentials"
+1. **[Download the latest release](../../../releases/latest)**
+2. Copy `RankedEssentials.dll` to `%APPDATA%\bakkesmod\bakkesmod\plugins\`
+3. Configure in-game: F2 → Plugins → "Ranked Essentials"
+
 
 ## Settings
 

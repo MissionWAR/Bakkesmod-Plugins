@@ -1,0 +1,45 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Plugin
+        working-directory: RankedEssentials
+        run: msbuild BakkesPluginTemplate.vcxproj /p:Configuration=Release /p:Platform=x64
+
+      - name: Get version from tag
+        id: version
+        shell: bash
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Ranked Essentials ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Ranked Essentials ${{ steps.version.outputs.VERSION }}
+            
+            Auto-queue, auto-freeplay, and auto-skip replays for Rocket League.
+            
+            ### Installation
+            1. Download `RankedEssentials.dll` below
+            2. Copy to `%APPDATA%\bakkesmod\bakkesmod\plugins\`
+            3. Load in-game: F6 → `plugin load RankedEssentials`
+          files: RankedEssentials/plugins/RankedEssentials.dll
+          draft: false
+          prerelease: false
